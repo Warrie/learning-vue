@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    
+</head>
+<body>
+    <div id="todo">
+        <input type="text" v-model="input" @keyup.enter="add">
+
+        <ul>
+            <li v-for="(item,index) in todoList">{{item}}<button @click="remove(index)">×</button></li>
+        </ul>
+    </div>
+
+
+
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        //引入vue后会给一个Vue构造函数
+        let vm=new Vue({//返回的就是一个viewmodel，把数据和视图都绑上去
+            el:"#todo",
+            data:{//data的数据会被vm代理
+                input:'',
+                todoList:[]
+            },
+            methods:{
+                add(){
+                    this.todoList.unshift(this.input);
+                    this.input='';//清空
+                },
+                remove(index){
+                    this.todoList.splice(index,1);
+                }
+            }
+        })
+    </script> 
+</body>
+</html>
